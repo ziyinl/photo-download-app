@@ -3,10 +3,150 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>照片下載系統</title>
+
+  <title>個人照片下載系統</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      background: #f3f5f7;
+      color: #263238;
+      font-family: Arial, sans-serif;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 480px;
+      padding: 40px 32px;
+      background: #ffffff;
+      border-radius: 16px;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+      text-align: center;
+    }
+
+    h1 {
+      margin: 0 0 12px;
+      font-size: 30px;
+    }
+
+    .description {
+      margin: 0 0 28px;
+      color: #607d8b;
+      font-size: 16px;
+      line-height: 1.7;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 8px;
+      text-align: left;
+      font-size: 15px;
+      font-weight: bold;
+    }
+
+    input {
+      width: 100%;
+      padding: 14px 16px;
+      border: 1px solid #cfd8dc;
+      border-radius: 8px;
+      font-size: 17px;
+      outline: none;
+    }
+
+    input:focus {
+      border-color: #455a64;
+      box-shadow: 0 0 0 3px rgba(69, 90, 100, 0.12);
+    }
+
+    button {
+      width: 100%;
+      margin-top: 16px;
+      padding: 14px;
+      border: 0;
+      border-radius: 8px;
+      background: #37474f;
+      color: #ffffff;
+      font-size: 17px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #263238;
+    }
+
+    #message {
+      min-height: 24px;
+      margin-top: 20px;
+      font-size: 15px;
+      line-height: 1.6;
+    }
+
+    .success {
+      color: #2e7d32;
+    }
+
+    .error {
+      color: #c62828;
+    }
+  </style>
 </head>
+
 <body>
-  <h1>照片下載系統</h1>
-  <p>網站已成功建立。</p>
+  <main class="container">
+    <h1>個人照片下載系統</h1>
+
+    <p class="description">
+      請輸入完整姓名，查詢並下載您的個人照片。
+    </p>
+
+    <form id="searchForm">
+      <label for="name">姓名</label>
+
+      <input
+        id="name"
+        name="name"
+        type="text"
+        placeholder="例如：王小明"
+        autocomplete="off"
+        required
+      >
+
+      <button type="submit">查詢照片</button>
+    </form>
+
+    <div id="message"></div>
+  </main>
+
+  <script>
+    const searchForm = document.getElementById("searchForm");
+    const nameInput = document.getElementById("name");
+    const message = document.getElementById("message");
+
+    searchForm.addEventListener("submit", function (event) {
+      event.preventDefault();
+
+      const name = nameInput.value.trim();
+
+      if (!name) {
+        message.className = "error";
+        message.textContent = "請先輸入姓名。";
+        return;
+      }
+
+      message.className = "success";
+      message.textContent =
+        "已收到「" + name + "」的查詢。下一步會接上照片資料。";
+    });
+  </script>
 </body>
 </html>
