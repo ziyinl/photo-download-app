@@ -135,18 +135,36 @@
     searchForm.addEventListener("submit", function (event) {
       event.preventDefault();
 
-      const name = nameInput.value.trim();
+      const photoList = {
+  "王小明": "photos/王小明.jpg"
+};
 
-      if (!name) {
-        message.className = "error";
-        message.textContent = "請先輸入姓名。";
-        return;
-      }
+searchForm.addEventListener("submit", function (event) {
+  event.preventDefault();
 
-      message.className = "success";
-      message.textContent =
-        "已收到「" + name + "」的查詢。下一步會接上照片資料。";
-    });
+  const name = nameInput.value.trim();
+  const photoPath = photoList[name];
+
+  if (!name) {
+    message.className = "error";
+    message.textContent = "請先輸入姓名。";
+    return;
+  }
+
+  if (!photoPath) {
+    message.className = "error";
+    message.textContent = "查無照片，請確認姓名是否輸入正確。";
+    return;
+  }
+
+  message.className = "success";
+  message.innerHTML = `
+    <p>已找到 ${name} 的照片。</p>
+    <a href="${photoPath}" download="${name}.jpg">
+      <button type="button">下載照片</button>
+    </a>
+  `;
+});
   </script>
 </body>
 </html>
